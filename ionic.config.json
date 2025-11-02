@@ -1,0 +1,7 @@
+{
+  "name": "InventrakMovil",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
