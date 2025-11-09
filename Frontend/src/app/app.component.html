@@ -1,3 +1,7 @@
 <ion-app>
+  <!-- navbar: aparece según showNavbar -->
+  <app-navbar *ngIf="showNavbar"></app-navbar>
+
+  <!-- las páginas de Ionic -->
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

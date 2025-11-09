@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Login } from 'src/app/interface/login.interface';
 import { ServiceService } from 'src/app/services/service';
 
@@ -24,7 +24,9 @@ export class LoginPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: ServiceService,
-    private router: Router
+    private router: Router,
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit(): void {
@@ -35,14 +37,30 @@ export class LoginPage implements OnInit {
     });
   }
 
+  // Helper: toast rápido (success | danger | warning | primary)
+  private async presentToast(message: string, color: 'success' | 'danger' | 'warning' | 'primary' = 'danger', duration = 2000) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration,
+      color,
+      position: 'top'
+    });
+    await toast.present();
+  }
+
+  // Helper: alert modal (cuando se necesita confirmación o mensaje largo)
+  private async presentAlert(header: string, message?: string) {
+    const alert = await this.alertCtrl.create({
+      header,
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
   login() {
     if (this.loginForm.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Revisa los campos del formulario.',
-        showConfirmButton: false,
-        timer: 2200,
-      });
+      this.presentToast('Revisa los campos del formulario.', 'danger', 2200);
       return;
     }
 
@@ -54,18 +72,13 @@ export class LoginPage implements OnInit {
     };
 
     this.service.login(loginData).subscribe({
-      next: (response: any) => {
+      next: async (response: any) => {
         this.isLoading = false;
         // Esperamos token temporal del backend para usar en la verificación
         if (response?.message && response?.token) {
           // Guardamos en localStorage como temp hasta que verifiquen
           localStorage.setItem(this.tempTokenKey, response.token);
-          Swal.fire({
-            icon: 'success',
-            title: 'Se envió el código de verificación a tu correo',
-            showConfirmButton: false,
-            timer: 1800,
-          });
+          await this.presentToast('Se envió el código de verificación a tu correo', 'success', 1800);
           this.showVerificationForm = true;
 
           // Hacemos required el campo verificationCode cuando aparece la sección
@@ -73,28 +86,17 @@ export class LoginPage implements OnInit {
           ctrl?.setValidators([Validators.required]);
           ctrl?.updateValueAndValidity();
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Respuesta inesperada del servidor',
-            text: response?.message || 'Sin token recibido',
-            showConfirmButton: false,
-            timer: 2200,
-          });
+          await this.presentToast(response?.message || 'Respuesta inesperada del servidor', 'danger', 2200);
         }
       },
-      error: (error: any) => {
+      error: async (error: any) => {
         this.isLoading = false;
         const mensaje =
           error.error?.error ||
           error.error?.message ||
           error.message ||
           'Ocurrió un error inesperado. Inténtalo de nuevo.';
-        Swal.fire({
-          icon: 'error',
-          title: mensaje,
-          showConfirmButton: false,
-          timer: 2500,
-        });
+        await this.presentToast(mensaje, 'danger', 2500);
       }
     });
   }
@@ -102,12 +104,7 @@ export class LoginPage implements OnInit {
   verifyCode() {
     const codeCtrl = this.loginForm.get('verificationCode');
     if (codeCtrl?.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Ingresa el código de verificación',
-        showConfirmButton: false,
-        timer: 1800,
-      });
+      this.presentToast('Ingresa el código de verificación', 'danger', 1800);
       codeCtrl?.markAsTouched();
       return;
     }
@@ -116,12 +113,7 @@ export class LoginPage implements OnInit {
     const tempToken = localStorage.getItem(this.tempTokenKey) || '';
 
     if (!tempToken) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Token temporal no encontrado. Vuelve a iniciar sesión.',
-        showConfirmButton: false,
-        timer: 2200,
-      });
+      this.presentToast('Token temporal no encontrado. Vuelve a iniciar sesión.', 'danger', 2200);
       // Reset: esconder formulario de verificación por seguridad
       this.showVerificationForm = false;
       return;
@@ -130,7 +122,7 @@ export class LoginPage implements OnInit {
     this.isVerifying = true;
 
     this.service.verifyCode({ code }, tempToken).subscribe({
-      next: (response: any) => {
+      next: async (response: any) => {
         this.isVerifying = false;
         if (response?.message === 'Código verificado correctamente' || /verificad/i.test(response?.message)) {
           // Mover temp token a token oficial (si tu backend maneja tokens finales distintos, ajusta aquí)
@@ -138,38 +130,22 @@ export class LoginPage implements OnInit {
           localStorage.setItem(this.authTokenKey, tempToken);
           localStorage.removeItem(this.tempTokenKey);
 
-          Swal.fire({
-            icon: 'success',
-            title: 'Código verificado correctamente',
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          await this.presentToast('Código verificado correctamente', 'success', 1500);
 
           // Navegar a la app (ajusta la ruta)
           this.router.navigate(['/inventario']);
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Código incorrecto',
-            text: response?.message || '',
-            showConfirmButton: false,
-            timer: 2000,
-          });
+          await this.presentToast(response?.message || 'Código incorrecto', 'danger', 2000);
         }
       },
-      error: (error: any) => {
+      error: async (error: any) => {
         this.isVerifying = false;
         const mensaje =
           error.error?.error ||
           error.error?.message ||
           error.message ||
           'Hubo un problema al verificar el código';
-        Swal.fire({
-          icon: 'error',
-          title: mensaje,
-          showConfirmButton: false,
-          timer: 2200,
-        });
+        await this.presentToast(mensaje, 'danger', 2200);
       }
     });
   }

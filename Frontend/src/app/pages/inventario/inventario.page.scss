@@ -1,0 +1,122 @@
+/* Ultra-compact single-row layout (mobile-first) */
+
+:host { display:block; min-height:100vh; }
+
+/* background */
+.page-bg {
+  --background: none;
+  background-image: url('/assets/FONDO.png');
+  background-size: 500px;
+  background-repeat: repeat;
+  background-position: top left;
+}
+
+/* container */
+.inventario-container {
+  background: #f9f9f9;
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  max-width: 920px;
+  margin: 0.6rem auto;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* header */
+.header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:0.5rem;
+  margin-bottom:0.45rem;
+}
+.title-block h2 { margin:0; font-size:1.05rem; }
+.title-block .sub { margin:0; font-size:0.72rem; color:#6b7280; }
+.search-box { max-width:240px; width:100%; }
+
+/* small labels row */
+.labels-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0.35rem 0.45rem;
+  background:#eaf0f6;
+  border-radius:6px;
+  font-weight:700;
+  color:#0b1220;
+  margin-bottom:0.35rem;
+  font-size:0.88rem;
+}
+
+/* product row: single horizontal line */
+.productos-list { margin-bottom:0.4rem; }
+.producto-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:0.5rem;
+  padding:0.36rem 0.45rem;
+  border-bottom:1px solid rgba(15,23,42,0.06);
+  background:transparent;
+  box-sizing:border-box;
+  min-height:44px;
+}
+
+/* left info */
+.info { display:flex; flex-direction:column; min-width:0; }
+.nombre {
+  font-weight:700;
+  font-size:0.98rem;
+  line-height:1.05;
+  color:#0b1220;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.meta {
+  font-size:0.68rem;
+  color:#6b7280;
+  margin-top:2px;
+}
+
+/* right controls compact */
+.controls {
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  flex-shrink:0;
+}
+
+.qty {
+  background:#efefef;
+  padding:0.12rem 0.38rem;
+  border-radius:6px;
+  font-weight:700;
+  font-size:0.86rem;
+  min-width:32px;
+  text-align:center;
+}
+
+/* make toggle small */
+ion-toggle.toggle { transform:scale(0.9); --handle-background: #fff; }
+
+/* menu button compact */
+.menu-btn { --padding-start:4px; --padding-end:4px; --padding-top:3px; --padding-bottom:3px; }
+
+/* footer button */
+.footer { margin-top:0.8rem; }
+.agregar { --background:#8ae88a; --color:#000; border-radius:0.6rem; padding:0.44rem; font-weight:700; }
+
+/* responsive: tablet/desktop allow name wrap and slightly larger layout */
+@media (min-width:720px) {
+  .producto-row { min-height:48px; padding:0.45rem 0.6rem; }
+  .nombre { white-space: normal; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; }
+  .labels-row { display:flex; }
+}
+
+/* wider screens: increase spacing a bit and show labels row as a "header" area */
+@media (min-width:980px) {
+  .inventario-container { max-width:1100px; padding:0.6rem; }
+  .producto-row { padding:0.5rem 0.7rem; }
+  .nombre { font-size:1rem; }
+}

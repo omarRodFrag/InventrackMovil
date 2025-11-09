@@ -1,0 +1,68 @@
+:host { display: block; }
+
+/* Barra superior REALMENTE negra */
+ion-header.topbar {
+  --background: #000 !important; /* fuerza fondo negro */
+  background: #000 !important;
+}
+
+/* Toolbar también se lo ponemos directo porque Ionic manda estilos con shadow DOM */
+ion-header.topbar ion-toolbar {
+  --background: #000 !important;
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* Links a la izquierda */
+.links-left {
+  display:flex;
+  gap: 0.9rem;
+  align-items:center;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  display:flex;
+  align-items:center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+.nav-link.active {
+  text-decoration: underline;
+  background: rgba(255,255,255,0.03);
+}
+
+/* alerta */
+.alert-count {
+  --background: #ff4d4f;
+  color: #fff;
+  margin-left: 6px;
+  font-size: 0.75rem;
+}
+
+/* empuja al logout */
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+/* boton logout */
+.logout-btn {
+  color: #fff;
+  --padding-start: 0.4rem;
+  --padding-end: 0.4rem;
+}
+
+.logout-text {
+  margin-left: 0.35rem;
+  font-weight: 600;
+}
+
+/* responsive tweaks: en móviles dejamos icon + texto reducido */
+@media (max-width: 720px) {
+  .nav-link span { display: none; } /* muestra solo icono en móvil si quieres */
+  .logout-text { display: none; }
+  .nav-link { padding: 0.2rem 0.35rem; }
+}

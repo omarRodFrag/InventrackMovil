@@ -1,13 +1,58 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>inventario</ion-title>
+    <ion-title>Inventario</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">inventario</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding page-bg" fullscreen>
+  <div class="inventario-container">
+    <div class="header">
+      <div class="title-block">
+        <h2>Inventario</h2>
+        <p class="sub">Listado de productos</p>
+      </div>
+
+      <ion-searchbar
+        [(ngModel)]="searchTerm"
+        placeholder="Buscar producto"
+        class="search-box"
+        showCancelButton="never">
+      </ion-searchbar>
+    </div>
+
+    <!-- (Opcional) Encabezados compactos -->
+    <div class="labels-row">
+      <div class="label-left">Producto</div>
+      <div class="label-right">Cantidad · Activo · Acciones</div>
+    </div>
+
+    <!-- Lista: fila compacta por producto -->
+    <div class="productos-list">
+      <div *ngFor="let producto of productosFiltrados()" class="producto-row">
+        <div class="info">
+          <div class="nombre">{{ producto.nombre }}</div>
+          <div class="meta">ID: {{ producto.idProducto || '-' }}</div>
+        </div>
+
+        <div class="controls">
+          <div class="qty">{{ producto.cantidad }}</div>
+
+          <ion-toggle
+            [checked]="producto.activo"
+            (ionChange)="onToggleStatus($event, producto)"
+            aria-label="Activo"
+            class="toggle">
+          </ion-toggle>
+
+          <ion-button fill="clear" size="small" (click)="openActions(producto)" class="menu-btn">
+            <ion-icon name="ellipsis-vertical" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <ion-button expand="block" class="agregar" (click)="agregarProducto()">Agregar Producto</ion-button>
+    </div>
+  </div>
 </ion-content>

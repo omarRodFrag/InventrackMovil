@@ -1,13 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>alertas</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Alertas de Stock</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">alertas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding" [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Productos con bajo stock ({{ alertas.length }})</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <!-- Si no hay alertas -->
+  <div *ngIf="alertas.length === 0" class="sin-alertas">
+    ✅ Todo en orden, no hay productos con stock bajo.
+  </div>
+
+  <!-- Lista de alertas -->
+  <ion-list>
+    <ion-item *ngFor="let p of alertas" [color]="p.cantidad === 0 ? 'danger' : 'warning'">
+      <ion-label>
+        <h2>{{ p.nombre }}</h2>
+        <p>{{ p.cantidad }} / mín. {{ p.stockMinimo }}</p>
+      </ion-label>
+      <ion-button slot="end" fill="outline" color="primary" [routerLink]="['/stock', p.idProducto]">
+        Ajustar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" fill="clear" routerLink="/inventario">
+    ⬅ Volver al inventario
+  </ion-button>
 </ion-content>

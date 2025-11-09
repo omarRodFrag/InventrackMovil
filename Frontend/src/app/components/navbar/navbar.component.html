@@ -1,3 +1,26 @@
-<p>
-  navbar works!
-</p>
+<!-- Usamos ion-header/toolbar para que se integre con Ionic -->
+<ion-header class="topbar">
+  <ion-toolbar>
+    <!-- izquierda: enlaces -->
+    <ion-buttons slot="start" class="links-left">
+      <a class="nav-link" routerLink="/inventario" routerLinkActive="active">Inventario</a>
+
+      <a class="nav-link alert-link" routerLink="/alertas" routerLinkActive="active">
+        <ion-icon name="alert-circle" slot="start"></ion-icon>
+        <span>Alertas</span>
+        <ion-badge *ngIf="alertasCount$ | async as n" class="alert-count">{{ n }}</ion-badge>
+      </a>
+    </ion-buttons>
+
+    <!-- espacio que empuja hacia la derecha -->
+    <div class="flex-spacer" slot="end"></div>
+
+    <!-- derecha: logout -->
+    <ion-buttons slot="end" class="buttons-right">
+      <ion-button fill="clear" class="logout-btn" (click)="confirmLogout()">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+        <span class="logout-text">Salir</span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

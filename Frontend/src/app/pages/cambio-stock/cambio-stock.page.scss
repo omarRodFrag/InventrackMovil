@@ -1,0 +1,66 @@
+:host {
+  display: block;
+  height: 100%;
+  background-image: url('/assets/FONDO.png');
+  background-size: 500px;
+  background-repeat: repeat;
+  background-position: top left;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+ion-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+}
+
+form {
+  max-width: 650px;
+  margin: auto;
+  background: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+
+  ion-item {
+    margin-bottom: 16px;
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+  }
+
+  ion-label {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  ion-input.invalid {
+    border: 1px solid #dc3545;
+    border-radius: 6px;
+  }
+
+  ion-note {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  ion-button {
+    margin-top: 12px;
+    border-radius: 1rem;
+    font-weight: bold;
+  }
+
+  ion-button[fill="outline"] {
+    background-color: #ccc;
+    color: #000;
+  }
+
+  ion-button[color="success"] {
+    background-color: #8ae88a;
+    color: #000;
+  }
+
+  ion-button:disabled {
+    opacity: 0.6;
+  }
+}

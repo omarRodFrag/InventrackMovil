@@ -1,13 +1,50 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>agregar-producto</ion-title>
+    <ion-title>{{ modoEdicion ? 'Editar Producto' : 'Agregar Producto' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">agregar-producto</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding page-bg">
+  <div class="container-formulario">
+    <form [formGroup]="productoForm" (ngSubmit)="guardar()">
+
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Categoría</ion-label>
+        <ion-input type="text" formControlName="categoria"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea formControlName="descripcion"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Stock</ion-label>
+        <ion-input type="number" formControlName="cantidad" min="0"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Stock Mínimo</ion-label>
+        <ion-input type="number" formControlName="stockMinimo" min="0" step="0.01"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>Activo</ion-label>
+        <ion-checkbox slot="start" formControlName="activo"></ion-checkbox>
+      </ion-item>
+
+      <div class="button-group">
+        <ion-button expand="block" color="medium" (click)="cancelar()">Cancelar</ion-button>
+        <ion-button expand="block" type="submit" color="primary">
+          {{ modoEdicion ? 'Actualizar' : 'Guardar' }}
+        </ion-button>
+      </div>
+
+    </form>
+  </div>
 </ion-content>
