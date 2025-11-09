@@ -1,0 +1,45 @@
+.login-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.img-container {
+  width: 45%;
+}
+
+.img-container img {
+  width: 100%;
+  height: auto;
+}
+
+.form-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+ion-item {
+  margin-bottom: 1rem;
+}
+
+ion-button {
+  margin-top: 1rem;
+  --border-radius: 40px;
+  --background: #eb6417;
+}
+
+@media screen and (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .img-container {
+    width: 100%;
+  }
+}

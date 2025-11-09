@@ -19,7 +19,7 @@ from Backend.Functions import dbConnLocal  # Para hacer la conexión a la BD
 from flask_mail import Mail, Message
 
 app = Flask(__name__)
-CORS(app, origins=["https://inventario-web-iozf.onrender.com"])
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 
@@ -191,7 +191,7 @@ def cambiar_estado_producto(current_user, idProducto):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
 
 
 
