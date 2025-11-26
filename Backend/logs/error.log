@@ -1,0 +1,101 @@
+2025-11-24 21:50:54,132 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-24 21:50:54,133 - WARNING - Functions - Token faltante en request a GET /productos
+2025-11-24 21:50:54,133 - INFO - Directions - REQ END - GET /productos - status 403
+2025-11-24 21:51:55,291 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-24 21:51:55,292 - INFO - Functions - Token inválido o con firma incorrecta
+2025-11-24 21:51:55,292 - INFO - Directions - REQ END - GET /productos - status 401
+//
+2025-11-24 21:53:15,124 - INFO - Directions - REQ START - POST /login - from 127.0.0.1
+2025-11-24 21:53:15,217 - INFO - Functions - LOGIN_FAIL - usuario no encontrado - email=usuario_noexistente@ej.com
+2025-11-24 21:53:15,217 - INFO - Directions - LOGIN_ATTEMPT - email=usuario_noexistente@ej.com - result_code=203
+2025-11-24 21:53:15,217 - INFO - Directions - REQ END - POST /login - status 203
+//
+2025-11-24 21:56:51,878 - INFO - Directions - REQ START - POST /productos/agregar - from 127.0.0.1
+2025-11-24 21:56:51,965 - ERROR - Directions - Error al agregar producto
+Traceback (most recent call last):
+  File "C:\Users\comet\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\werkzeug\wrappers\request.py", line 608, in get_json
+    rv = self.json_module.loads(data)
+  File "C:\Users\comet\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\flask\json\provider.py", line 187, in loads
+    return json.loads(s, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 35 (char 34)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Ionic\InventrackMovil\Backend\Directions.py", line 154, in agregar_producto
+    data = request.get_json()
+  File "C:\Users\comet\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\werkzeug\wrappers\request.py", line 617, in get_json
+    rv = self.on_json_loading_failed(e)
+  File "C:\Users\comet\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\flask\wrappers.py", line 131, in on_json_loading_failed
+    return super().on_json_loading_failed(e)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\comet\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\werkzeug\wrappers\request.py", line 642, in on_json_loading_failed
+    raise BadRequest(f"Failed to decode JSON object: {e}")
+werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: Expecting property name enclosed in double quotes: line 1 column 35 (char 34)
+2025-11-24 21:56:51,982 - INFO - Directions - REQ END - POST /productos/agregar - status 500
+//
+2025-11-24 21:58:26,552 - INFO - Directions - REQ START - PATCH /productos/stock/1 - from 127.0.0.1
+2025-11-24 21:58:26,728 - INFO - Functions - ajustar_stock - intento reducir por debajo de 0 - idProducto=1 - cantidad=-9999
+2025-11-24 21:58:26,728 - WARNING - Directions - AJUSTAR_STOCK_FAILED - idProducto=1 - error=No hay suficiente stock para realizar esta operación
+2025-11-24 21:58:26,729 - INFO - Directions - REQ END - PATCH /productos/stock/1 - status 400
+//
+//
+//
+//
+2025-11-24 22:04:41,586 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-24 22:04:41,587 - WARNING - Functions - Token faltante en request a GET /productos
+2025-11-24 22:04:41,587 - INFO - Directions - REQ END - GET /productos - status 403
+2025-11-24 22:08:22,551 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-24 22:08:22,551 - INFO - Functions - Token inválido o con firma incorrecta
+2025-11-24 22:08:22,551 - INFO - Directions - REQ END - GET /productos - status 401
+2025-11-24 22:09:21,396 - INFO - Directions - REQ START - POST /login - from 127.0.0.1
+2025-11-24 22:09:21,561 - INFO - Functions - LOGIN_FAIL - usuario no encontrado - email=usuario_noexistente@ej.com
+2025-11-24 22:09:21,561 - INFO - Directions - LOGIN_ATTEMPT - email=usuario_noexistente@ej.com - result_code=203
+2025-11-24 22:09:21,561 - INFO - Directions - REQ END - POST /login - status 203
+2025-11-24 22:10:45,292 - INFO - Directions - REQ START - POST /productos/agregar - from 127.0.0.1
+2025-11-24 22:10:45,382 - ERROR - Directions - Error al agregar producto
+Traceback (most recent call last):
+  File "C:\Users\comet\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\werkzeug\wrappers\request.py", line 608, in get_json
+    rv = self.json_module.loads(data)
+  File "C:\Users\comet\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\flask\json\provider.py", line 187, in loads
+    return json.loads(s, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 35 (char 34)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Ionic\InventrackMovil\Backend\Directions.py", line 154, in agregar_producto
+    data = request.get_json()
+  File "C:\Users\comet\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\werkzeug\wrappers\request.py", line 617, in get_json
+    rv = self.on_json_loading_failed(e)
+  File "C:\Users\comet\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\flask\wrappers.py", line 131, in on_json_loading_failed
+    return super().on_json_loading_failed(e)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\comet\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\werkzeug\wrappers\request.py", line 642, in on_json_loading_failed
+    raise BadRequest(f"Failed to decode JSON object: {e}")
+werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: Expecting property name enclosed in double quotes: line 1 column 35 (char 34)
+2025-11-24 22:10:45,384 - INFO - Directions - REQ END - POST /productos/agregar - status 500
+2025-11-24 22:12:02,110 - INFO - Directions - REQ START - PATCH /productos/stock/1 - from 127.0.0.1
+2025-11-24 22:12:02,284 - INFO - Functions - ajustar_stock - intento reducir por debajo de 0 - idProducto=1 - cantidad=-9999
+2025-11-24 22:12:02,284 - WARNING - Directions - AJUSTAR_STOCK_FAILED - idProducto=1 - error=No hay suficiente stock para realizar esta operación
+2025-11-24 22:12:02,285 - INFO - Directions - REQ END - PATCH /productos/stock/1 - status 400

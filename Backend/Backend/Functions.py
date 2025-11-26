@@ -20,12 +20,35 @@ from pymongo import MongoClient
 import datetime
 from Backend.GlobalInfo.keys import JWT_SECRET_KEY
 
+# --- Logging setup (comparte el logger 'invenTrackLogger') ---
+import logging
+from logging.handlers import RotatingFileHandler
+import os
+
+LOG_DIR = 'logs'
+os.makedirs(LOG_DIR, exist_ok=True)
+
+logger = logging.getLogger('invenTrackLogger')
+logger.setLevel(logging.INFO)
+if not logger.hasHandlers():
+    log_path = os.path.join(LOG_DIR, 'error.log')
+    fh = RotatingFileHandler(log_path, maxBytes=5*1024*1024, backupCount=5, encoding='utf-8')
+    fh.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(module)s - %(message)s')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+# ----------------------------------------------------------------
 
 # Connection to database
 if BaseDatos.dbconn == None:
-    mongoConnect = MongoClient(BaseDatos.strConnection)
-    BaseDatos.dbconn = mongoConnect[BaseDatos.strDBConnection]
-    dbConnLocal = BaseDatos.dbconn
+    try:
+        mongoConnect = MongoClient(BaseDatos.strConnection)
+        BaseDatos.dbconn = mongoConnect[BaseDatos.strDBConnection]
+        dbConnLocal = BaseDatos.dbconn
+        logger.info("Inicializada variable BaseDatos.dbconn")
+    except Exception:
+        logger.exception("Error inicializando BaseDatos.dbconn")
+        dbConnLocal = None
 
 mail = Mail()
 from pymongo import MongoClient
@@ -35,17 +58,17 @@ import Backend.GlobalInfo.keys as BaseDatos
 try:
     mongoConnect = MongoClient(BaseDatos.strConnection)
     dbConnLocal = mongoConnect[BaseDatos.strDBConnection]
-    print("Conexión exitosa a MongoDB Atlas")
+    logger.info("Conexión exitosa a MongoDB Atlas")
     
     # Prueba una simple consulta
     test_collection = dbConnLocal.clUsuarios.find_one()
     if test_collection:
-        print("Conexión verificada, datos obtenidos.")
+        logger.info("Conexión verificada, datos obtenidos.")
     else:
-        print("Conexión exitosa, pero no se encontraron datos.")
+        logger.info("Conexión verificada, pero no se encontraron datos.")
     
 except Exception as e:
-    print("Error de conexión a MongoDB Atlas:", e)
+    logger.exception("Error de conexión a MongoDB Atlas: %s", e)
 
 def token_required(f):
     @wraps(f)
@@ -54,9 +77,14 @@ def token_required(f):
         
         # Verificar si el token está en los encabezados
         if 'Authorization' in request.headers:
-            token = request.headers['Authorization'].split(" ")[1]  # Obtener el token de los encabezados
+            try:
+                token = request.headers['Authorization'].split(" ")[1]  # Obtener el token de los encabezados
+            except Exception:
+                logger.warning("Authorization header mal formado")
+                return jsonify({'message': 'Token es requerido'}), 403
         
         if not token:
+            logger.warning("Token faltante en request a %s %s", request.method, request.path)
             return jsonify({'message': 'Token es requerido'}), 403
         
         try:
@@ -64,11 +92,17 @@ def token_required(f):
             decoded_token = jwt.decode(token, JWT_SECRET_KEY, algorithms=['HS256'])
             current_user = dbConnLocal.clUsuarios.find_one({"idUsuario": decoded_token['idUsuario']})
             if not current_user:
+                logger.warning("Token válido pero usuario no encontrado - idUsuario=%s", decoded_token.get('idUsuario'))
                 return jsonify({'message': 'Usuario no encontrado'}), 404
         except jwt.ExpiredSignatureError:
+            logger.info("Token expirado")
             return jsonify({'message': 'Token ha expirado'}), 401
         except jwt.InvalidTokenError:
+            logger.info("Token inválido o con firma incorrecta")
             return jsonify({'message': 'Token inválido'}), 401
+        except Exception:
+            logger.exception("Error verificando token")
+            return jsonify({'message': 'Error verificando token'}), 401
         
         return f(current_user, *args, **kwargs)
     
@@ -104,19 +138,23 @@ def fnLogin(email, password):
                 # Enviar el código de verificación por correo electrónico
                 email_sent = send_verification_email(jsnInfoUser['strEmail'], verification_code)
                 if email_sent:
+                    logger.info(f"LOGIN_SUCCESS - email={email} - idUsuario={jsnInfoUser.get('idUsuario')}")
                     return {
                                 'intResponse': 200,
                                 'message': 'Código de verificación enviado al correo.',
                                 'token': token
                             }
                 else:
+                    logger.error("LOGIN_EMAIL_FAIL - No se pudo enviar el correo de verificación - email=%s", jsnInfoUser.get('strEmail'))
                     return {'intResponse': 500, 'Result': {'error': 'No se pudo enviar el correo de verificación.'}}
             else:
+                logger.info(f"LOGIN_FAIL - contraseña incorrecta - email={email}")
                 return {'intResponse': 203, 'Result': {'usuario': {}, 'error': 'Usuario o contraseña incorrecta'}}  # Contraseña incorrecta
         else:
+            logger.info(f"LOGIN_FAIL - usuario no encontrado - email={email}")
             return {'intResponse': 203, 'Result': {'usuario': {}, 'error': 'Usuario no encontrado'}}  # Usuario no encontrado
     except Exception as exception:
-        print('fnLogin', exception)
+        logger.exception("Error en fnLogin")
         return {'intResponse': 500}  # Error interno del servidor
 
 
@@ -138,19 +176,19 @@ def obtener_productos():
             "ultimaActualizacion": p.get("ultimaActualizacion"),
         } for p in productos]
 
+        logger.info(f"obtener_productos - encontrado {len(productos)} productos")
         return productos
     except Exception as e:
+        logger.exception("Error en obtener_productos")
         HelperFunctions.PrintException()
         return []
-
-
-
 
 # Función para obtener un producto específico por ID
 def obtener_producto(idProducto):
     try:
         producto = dbConnLocal.clProductos.find_one({"idProducto": idProducto})
         if producto:
+            logger.info(f"obtener_producto - idProducto={idProducto} - encontrado")
             return {
                 "_id": str(producto["_id"]),
                 "idProducto": producto.get("idProducto"),
@@ -163,8 +201,10 @@ def obtener_producto(idProducto):
                 "fechaRegistro": producto.get("fechaRegistro"),
                 "ultimaActualizacion": producto.get("ultimaActualizacion")
             }
+        logger.warning(f"obtener_producto - idProducto={idProducto} - no encontrado")
         return None
     except Exception as e:
+        logger.exception("Error en obtener_producto")
         HelperFunctions.PrintException()
         return None
 
@@ -193,10 +233,11 @@ def agregar_producto(data):
         }
 
         # Insertar en la colección
-        dbConnLocal.clProductos.insert_one(nuevo_producto)
-
+        insert_res = dbConnLocal.clProductos.insert_one(nuevo_producto)
+        logger.info(f"agregar_producto - idProducto={nuevo_id} - inserted_id={insert_res.inserted_id}")
         return {'success': True}
     except Exception as e:
+        logger.exception("Error en agregar_producto")
         HelperFunctions.PrintException()
         return {'success': False, 'error': 'No se pudo agregar el producto'}
 
@@ -206,6 +247,7 @@ def actualizar_producto(idProducto, data):
     try:
         producto = dbConnLocal.clProductos.find_one({"idProducto": idProducto})
         if not producto:
+            logger.warning(f"actualizar_producto - idProducto={idProducto} - no encontrado")
             return {'success': False, 'error': 'Producto no encontrado'}
 
         # Actualización dinámica
@@ -217,10 +259,13 @@ def actualizar_producto(idProducto, data):
         )
 
         if result.modified_count > 0:
+            logger.info(f"actualizar_producto - idProducto={idProducto} - modificados={result.modified_count}")
             return {'success': True}
         else:
+            logger.info(f"actualizar_producto - idProducto={idProducto} - no se realizaron cambios")
             return {'success': False, 'error': 'No se realizaron cambios'}
     except Exception as e:
+        logger.exception("Error en actualizar_producto")
         HelperFunctions.PrintException()
         return {'success': False, 'error': 'Error al actualizar producto'}
     
@@ -228,11 +273,13 @@ def ajustar_stock(idProducto, cantidad):
     try:
         producto = dbConnLocal.clProductos.find_one({"idProducto": idProducto})
         if not producto:
+            logger.warning(f"ajustar_stock - idProducto={idProducto} - no encontrado")
             return {'success': False, 'error': 'Producto no encontrado'}
 
         nuevo_stock = producto.get('cantidad', 0) + cantidad
 
         if nuevo_stock < 0:
+            logger.info(f"ajustar_stock - intento reducir por debajo de 0 - idProducto={idProducto} - cantidad={cantidad}")
             return {'success': False, 'error': 'No hay suficiente stock para realizar esta operación'}
 
         dbConnLocal.clProductos.update_one(
@@ -244,8 +291,10 @@ def ajustar_stock(idProducto, cantidad):
                 }
             }
         )
+        logger.info(f"ajustar_stock - idProducto={idProducto} - nuevo_stock={nuevo_stock}")
         return {'success': True}
     except Exception as e:
+        logger.exception("Error en ajustar_stock")
         HelperFunctions.PrintException()
         return {'success': False, 'error': 'Error al ajustar stock'}
     
@@ -255,10 +304,13 @@ def eliminar_producto(idProducto):
         resultado = dbConnLocal.clProductos.delete_one({"idProducto": idProducto})
 
         if resultado.deleted_count > 0:
+            logger.info(f"eliminar_producto - idProducto={idProducto} - eliminado")
             return {'success': True}
         else:
+            logger.warning(f"eliminar_producto - idProducto={idProducto} - no encontrado")
             return {'success': False, 'error': 'Producto no encontrado'}
     except Exception as e:
+        logger.exception("Error en eliminar_producto")
         HelperFunctions.PrintException()
         return {'success': False, 'error': 'Error al eliminar producto'}
 
@@ -270,9 +322,10 @@ def send_verification_email(email, code):
         msg = Message('Código de Verificación', recipients=[email])
         msg.body = f'Tu código de verificación es: {code}'
         mail.send(msg)
+        logger.info(f"send_verification_email - email enviado a {email}")
         return True
     except Exception as e:
-        print(f"Error al enviar correo: {e}")
+        logger.exception(f"Error al enviar correo a {email}")
         return False
 
 
@@ -287,12 +340,9 @@ def actualizar_activo(idProducto, activo):
                 "ultimaActualizacion": datetime.datetime.utcnow()
             }}
         )
+        logger.info(f"actualizar_activo - idProducto={idProducto} - activo={activo} - modified={res.modified_count}")
         return {'success': res.modified_count > 0}
     except Exception:
+        logger.exception("Error en actualizar_activo")
         HelperFunctions.PrintException()
         return {'success': False, 'error': 'Error al actualizar status'}
-    
-    
-
-
-
