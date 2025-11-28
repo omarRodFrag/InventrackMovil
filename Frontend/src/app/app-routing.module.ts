@@ -17,6 +17,10 @@ const routes: Routes = [
       .then(m => m.CambioStockPageModule)
   },
   { path: 'alertas', loadChildren: () => import('./pages/alertas/alertas.module').then(m => m.AlertasPageModule) },
+  {
+    path: 'venta',
+    loadChildren: () => import('./pages/venta-page/venta-page.module').then( m => m.VentaPagePageModule)
+  },
 ];
 
 @NgModule({

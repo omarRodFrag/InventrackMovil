@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
     private alertasService: AlertasService,
     private router: Router,
     private alertCtrl: AlertController
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.alertasCount$ = this.alertasService.alertasCount$;
@@ -29,20 +29,24 @@ export class NavbarComponent implements OnInit {
 
   /** Pregunta y cierra sesión */
   async confirmLogout() {
-  const alert = await this.alertCtrl.create({
-    header: 'Cerrar sesión',
-    message: '¿Seguro que quieres salir?',
-    buttons: [
-      { text: 'Cancelar', role: 'cancel' },
-      {
-        text: 'Salir',
-        handler: () => {
-          localStorage.removeItem('auth_token');
-          this.router.navigate(['/login']);
+    const alert = await this.alertCtrl.create({
+      header: 'Cerrar sesión',
+      message: '¿Seguro que quieres salir?',
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Salir',
+          handler: () => {
+            localStorage.removeItem('auth_token');
+            this.router.navigate(['/login']);
+          }
         }
-      }
-    ]
-  });
-  await alert.present();
-}
+      ]
+    });
+    await alert.present();
+  }
+  irPuntoVenta() {
+    this.router.navigate(['/venta']);
+  }
+
 }

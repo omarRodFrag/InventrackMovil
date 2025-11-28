@@ -99,3 +99,411 @@ werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: E
 2025-11-24 22:12:02,284 - INFO - Functions - ajustar_stock - intento reducir por debajo de 0 - idProducto=1 - cantidad=-9999
 2025-11-24 22:12:02,284 - WARNING - Directions - AJUSTAR_STOCK_FAILED - idProducto=1 - error=No hay suficiente stock para realizar esta operación
 2025-11-24 22:12:02,285 - INFO - Directions - REQ END - PATCH /productos/stock/1 - status 400
+2025-11-28 13:37:00,995 - INFO - Functions - Inicializada variable BaseDatos.dbconn
+2025-11-28 13:37:01,199 - INFO - Functions - Conexión exitosa a MongoDB Atlas
+2025-11-28 13:37:02,266 - INFO - Functions - Conexión verificada, datos obtenidos.
+2025-11-28 13:37:02,271 - INFO - Directions - Arrancando servidor en puerto 5000
+2025-11-28 13:37:02,926 - INFO - Functions - Inicializada variable BaseDatos.dbconn
+2025-11-28 13:37:02,963 - INFO - Functions - Conexión exitosa a MongoDB Atlas
+2025-11-28 13:37:03,821 - INFO - Functions - Conexión verificada, datos obtenidos.
+2025-11-28 13:37:03,825 - INFO - Directions - Arrancando servidor en puerto 5000
+2025-11-28 13:37:21,159 - INFO - Directions - REQ START - OPTIONS /login - from 127.0.0.1
+2025-11-28 13:37:21,159 - INFO - Directions - REQ END - OPTIONS /login - status 200
+2025-11-28 13:37:21,421 - INFO - Directions - REQ START - POST /login - from 127.0.0.1
+2025-11-28 13:37:23,359 - INFO - Functions - send_verification_email - email enviado a omar.rodfrag2304@gmail.com
+2025-11-28 13:37:23,359 - INFO - Functions - LOGIN_SUCCESS - email=omar.rodfrag2304@gmail.com - idUsuario=1
+2025-11-28 13:37:23,359 - INFO - Directions - LOGIN_ATTEMPT - email=omar.rodfrag2304@gmail.com - result_code=200
+2025-11-28 13:37:23,359 - INFO - Directions - REQ END - POST /login - status 200
+2025-11-28 13:37:43,567 - INFO - Directions - REQ START - OPTIONS /verify - from 127.0.0.1
+2025-11-28 13:37:43,568 - INFO - Directions - REQ END - OPTIONS /verify - status 200
+2025-11-28 13:37:43,871 - INFO - Directions - REQ START - POST /verify - from 127.0.0.1
+2025-11-28 13:37:43,968 - INFO - Directions - VERIFY_CODE - user_id=1
+2025-11-28 13:37:44,056 - INFO - Directions - VERIFY_CODE - usuario encontrado en BD - email=omar.rodfrag2304@gmail.com
+2025-11-28 13:37:44,056 - INFO - Directions - VERIFY_CODE - código verificado correctamente
+2025-11-28 13:37:44,056 - INFO - Directions - REQ END - POST /verify - status 200
+2025-11-28 13:37:44,485 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:37:44,485 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:37:44,788 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:37:44,789 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:37:44,791 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:37:44,968 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:37:44,968 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:37:44,968 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:37:45,273 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:37:45,448 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:37:45,448 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:37:45,449 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:37:45,753 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:37:45,927 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:37:45,927 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:37:45,927 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:37:46,239 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:37:46,415 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:37:46,415 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:37:46,415 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:37:46,721 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:37:46,895 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:37:46,895 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:37:46,895 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:37:54,415 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:37:54,415 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:37:54,664 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:37:54,837 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:37:54,837 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:37:54,838 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:37:56,043 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:37:56,218 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:37:56,218 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:37:56,218 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:37:56,530 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:37:56,705 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:37:56,705 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:37:56,705 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:40:45,579 - INFO - Functions - Inicializada variable BaseDatos.dbconn
+2025-11-28 13:40:45,618 - INFO - Functions - Conexión exitosa a MongoDB Atlas
+2025-11-28 13:40:46,714 - INFO - Functions - Conexión verificada, datos obtenidos.
+2025-11-28 13:40:46,718 - INFO - Directions - Arrancando servidor en puerto 5000
+2025-11-28 13:40:53,196 - INFO - Functions - Inicializada variable BaseDatos.dbconn
+2025-11-28 13:40:53,235 - INFO - Functions - Conexión exitosa a MongoDB Atlas
+2025-11-28 13:40:54,113 - INFO - Functions - Conexión verificada, datos obtenidos.
+2025-11-28 13:40:54,117 - INFO - Directions - Arrancando servidor en puerto 5000
+2025-11-28 13:43:05,351 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:43:05,351 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:43:05,415 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:43:05,415 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:43:05,617 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:05,799 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:05,799 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:05,800 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:05,801 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:05,981 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:05,982 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:05,982 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:06,301 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:06,482 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:06,483 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:06,483 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:34,539 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:43:34,540 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:43:34,863 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:35,048 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:35,048 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:35,048 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:35,129 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:35,311 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:35,311 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:35,311 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:35,360 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:35,542 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:35,542 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:35,542 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:37,570 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:37,751 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:37,751 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:37,751 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:38,054 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:38,236 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:38,236 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:38,236 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:38,551 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:38,732 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:38,732 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:38,732 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:57,320 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:43:57,320 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:43:57,636 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:57,818 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:57,818 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:57,819 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:57,887 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:58,069 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:58,069 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:58,070 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:58,135 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:58,316 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:58,316 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:58,317 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:43:59,734 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:43:59,918 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:43:59,918 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:43:59,919 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:44:00,237 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:44:00,418 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:44:00,418 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:44:00,418 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:46:42,575 - INFO - Functions - Inicializada variable BaseDatos.dbconn
+2025-11-28 13:46:42,611 - INFO - Functions - Conexión exitosa a MongoDB Atlas
+2025-11-28 13:46:43,758 - INFO - Functions - Conexión verificada, datos obtenidos.
+2025-11-28 13:46:43,762 - INFO - Directions - Arrancando servidor en puerto 5000
+2025-11-28 13:46:44,173 - INFO - Functions - Inicializada variable BaseDatos.dbconn
+2025-11-28 13:46:44,210 - INFO - Functions - Conexión exitosa a MongoDB Atlas
+2025-11-28 13:46:45,103 - INFO - Functions - Conexión verificada, datos obtenidos.
+2025-11-28 13:46:45,107 - INFO - Directions - Arrancando servidor en puerto 5000
+2025-11-28 13:46:57,310 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:46:57,311 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:46:57,574 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:46:57,757 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:46:57,757 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:46:57,757 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:52:32,598 - INFO - Directions - REQ START - OPTIONS /login - from 127.0.0.1
+2025-11-28 13:52:32,598 - INFO - Directions - REQ END - OPTIONS /login - status 200
+2025-11-28 13:52:32,863 - INFO - Directions - REQ START - POST /login - from 127.0.0.1
+2025-11-28 13:52:32,950 - INFO - Functions - LOGIN_FAIL - usuario no encontrado - email=omar.rodfrag@gmail.com
+2025-11-28 13:52:32,950 - INFO - Directions - LOGIN_ATTEMPT - email=omar.rodfrag@gmail.com - result_code=203
+2025-11-28 13:52:32,951 - INFO - Directions - REQ END - POST /login - status 203
+2025-11-28 13:52:57,088 - INFO - Directions - REQ START - OPTIONS /login - from 127.0.0.1
+2025-11-28 13:52:57,088 - INFO - Directions - REQ END - OPTIONS /login - status 200
+2025-11-28 13:52:57,405 - INFO - Directions - REQ START - POST /login - from 127.0.0.1
+2025-11-28 13:52:57,491 - INFO - Functions - LOGIN_FAIL - usuario no encontrado - email=omar.rodfrag@gmail.com
+2025-11-28 13:52:57,491 - INFO - Directions - LOGIN_ATTEMPT - email=omar.rodfrag@gmail.com - result_code=203
+2025-11-28 13:52:57,491 - INFO - Directions - REQ END - POST /login - status 203
+2025-11-28 13:53:04,353 - INFO - Directions - REQ START - OPTIONS /login - from 127.0.0.1
+2025-11-28 13:53:04,353 - INFO - Directions - REQ END - OPTIONS /login - status 200
+2025-11-28 13:53:04,658 - INFO - Directions - REQ START - POST /login - from 127.0.0.1
+2025-11-28 13:53:06,471 - INFO - Functions - send_verification_email - email enviado a omar.rodfrag2304@gmail.com
+2025-11-28 13:53:06,471 - INFO - Functions - LOGIN_SUCCESS - email=omar.rodfrag2304@gmail.com - idUsuario=1
+2025-11-28 13:53:06,471 - INFO - Directions - LOGIN_ATTEMPT - email=omar.rodfrag2304@gmail.com - result_code=200
+2025-11-28 13:53:06,471 - INFO - Directions - REQ END - POST /login - status 200
+2025-11-28 13:55:06,145 - INFO - Directions - REQ START - OPTIONS /verify - from 127.0.0.1
+2025-11-28 13:55:06,145 - INFO - Directions - REQ END - OPTIONS /verify - status 200
+2025-11-28 13:55:06,413 - INFO - Directions - REQ START - POST /verify - from 127.0.0.1
+2025-11-28 13:55:06,500 - INFO - Directions - VERIFY_CODE - user_id=1
+2025-11-28 13:55:06,586 - INFO - Directions - VERIFY_CODE - usuario encontrado en BD - email=omar.rodfrag2304@gmail.com
+2025-11-28 13:55:06,586 - INFO - Directions - VERIFY_CODE - código verificado correctamente
+2025-11-28 13:55:06,586 - INFO - Directions - REQ END - POST /verify - status 200
+2025-11-28 13:55:07,003 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:55:07,003 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:55:07,313 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:55:07,486 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:55:07,486 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:55:07,486 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:55:07,575 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:55:07,748 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:55:07,748 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:55:07,749 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:55:07,794 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:55:07,966 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:55:07,966 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:55:07,967 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:55:08,059 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:55:08,232 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:55:08,232 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:55:08,232 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:55:08,277 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:55:08,450 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:55:08,450 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:55:08,451 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:55:51,634 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:55:51,634 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:55:51,950 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:55:52,125 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:55:52,125 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:55:52,125 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:55:52,213 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:55:52,385 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:55:52,385 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:55:52,386 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:55:52,430 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:55:52,603 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:55:52,603 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:55:52,603 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:01,881 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:56:01,881 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:56:02,196 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:02,368 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:02,368 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:02,368 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:02,458 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:02,632 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:02,632 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:02,632 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:02,678 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:02,865 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:02,865 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:02,865 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:08,993 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:56:08,993 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:56:09,300 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:09,472 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:09,472 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:09,472 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:09,566 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:09,739 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:09,739 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:09,739 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:09,783 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:09,956 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:09,956 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:09,956 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:22,211 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:56:22,211 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:56:22,525 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:22,698 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:22,698 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:22,698 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:22,789 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:22,963 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:22,963 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:22,963 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:23,006 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:23,180 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:23,180 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:23,181 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:25,148 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:25,321 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:25,322 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:25,322 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:25,636 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:25,809 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:25,809 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:25,810 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:33,047 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:56:33,047 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:56:33,355 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:33,528 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:33,528 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:33,529 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:33,617 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:33,791 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:33,791 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:33,791 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:33,833 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:34,007 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:34,007 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:34,007 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:34,767 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:34,940 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:34,940 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:34,940 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:35,251 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:35,424 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:35,424 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:35,424 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:56:35,738 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:56:35,912 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:56:35,912 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:56:35,912 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:57:01,809 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:57:01,809 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:57:02,122 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:57:02,296 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:57:02,296 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:57:02,296 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:57:02,385 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:57:02,559 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:57:02,559 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:57:02,559 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:57:02,602 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:57:02,776 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:57:02,776 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:57:02,777 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:57:02,868 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:57:03,041 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:57:03,041 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:57:03,041 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:57:03,085 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:57:03,259 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:57:03,259 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:57:03,259 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:02,995 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:58:02,996 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:58:03,312 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:03,484 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:03,484 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:03,485 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:03,560 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:03,733 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:03,733 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:03,733 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:03,794 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:03,974 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:03,974 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:03,974 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:04,041 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:04,215 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:04,215 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:04,215 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:04,290 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:04,464 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:04,464 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:04,464 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:28,975 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:58:28,975 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:58:29,296 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:29,469 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:29,469 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:29,470 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:29,556 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:29,730 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:29,730 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:29,730 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:29,776 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:29,950 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:29,950 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:29,950 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:30,041 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:30,214 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:30,214 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:30,215 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:30,257 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:30,430 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:30,430 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:30,430 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:41,328 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:58:41,328 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:58:41,648 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:41,821 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:41,821 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:41,821 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:41,897 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:42,070 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:42,070 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:42,070 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:42,131 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:42,305 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:42,305 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:42,306 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:42,381 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:42,560 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:42,561 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:42,561 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:42,613 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:42,786 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:42,786 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:42,786 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:50,107 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:58:50,107 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:58:50,411 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:50,585 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:50,585 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:50,585 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:58:50,674 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:58:50,848 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:58:50,848 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:58:50,848 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:59:12,147 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:59:12,147 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:59:12,451 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:59:12,624 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:59:12,624 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:59:12,624 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:59:12,714 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:59:12,887 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:59:12,887 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:59:12,887 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:59:19,466 - INFO - Directions - REQ START - OPTIONS /venta - from 127.0.0.1
+2025-11-28 13:59:19,467 - INFO - Directions - REQ END - OPTIONS /venta - status 200
+2025-11-28 13:59:19,778 - INFO - Directions - REQ START - POST /venta - from 127.0.0.1
+2025-11-28 13:59:20,250 - INFO - Functions - procesar_venta_por_nombre - registrado en clVentas - idVenta=1 - inserted_id=6929ff182dad8b0bd8eb0af8
+2025-11-28 13:59:20,250 - INFO - Directions - VENTA_PROCESADA - nombre=Lapiz - cantidad=20 - user_id=1 - ventaId=1
+2025-11-28 13:59:20,251 - INFO - Directions - REQ END - POST /venta - status 200
+2025-11-28 13:59:36,871 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-11-28 13:59:36,872 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-11-28 13:59:37,184 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:59:37,356 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:59:37,356 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:59:37,356 - INFO - Directions - REQ END - GET /productos - status 200
+2025-11-28 13:59:37,447 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-11-28 13:59:37,621 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-11-28 13:59:37,621 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
+2025-11-28 13:59:37,622 - INFO - Directions - REQ END - GET /productos - status 200

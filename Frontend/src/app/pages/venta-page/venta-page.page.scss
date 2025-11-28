@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.page-bg {
+  background-image: url('/assets/FONDO.png');
+  background-size: 500px;
+  background-repeat: repeat;
+  background-position: top left;
+}
+
+.container-formulario {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 1.6rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.ticket {
+  margin-top: 20px;
+  padding: 1rem;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(245,245,250,1), rgba(255,255,255,1));
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.ticket h3 {
+  margin: 0 0 8px 0;
+  color: #2e7d32;
+}
+
+.ticket p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.ticket .small {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.ticket-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+}

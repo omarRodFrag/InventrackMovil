@@ -22,7 +22,7 @@ export class InventarioPage implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.cargarProductos();
@@ -42,6 +42,7 @@ export class InventarioPage implements OnInit {
     });
     await t.present();
   }
+
 
   cargarProductos(): void {
     const token = localStorage.getItem('auth_token') || '';

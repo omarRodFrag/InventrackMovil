@@ -239,6 +239,57 @@ def cambiar_estado_producto(current_user, idProducto):
         return jsonify({'error': 'Error al actualizar status'}), 500
 
 
+# Ruta para procesar venta (Punto de Venta) por nombre de producto
+@app.route('/venta', methods=['POST'])
+@token_required
+def procesar_venta(current_user):
+    try:
+        data = request.get_json() or {}
+        nombre = data.get('nombre')
+        cantidad = data.get('cantidad')
+
+        # Validaciones
+        if not nombre or str(nombre).strip() == "":
+            logger.warning("VENTA_FAILED - nombre de producto faltante - user_id=%s", current_user.get('idUsuario'))
+            return jsonify({'error': 'Nombre del producto es requerido'}), 400
+
+        try:
+            cantidad = int(cantidad)
+        except Exception:
+            logger.warning("VENTA_FAILED - cantidad invalida - value=%s - user_id=%s", cantidad, current_user.get('idUsuario'))
+            return jsonify({'error': 'Cantidad inválida'}), 400
+
+        if cantidad <= 0:
+            logger.warning("VENTA_FAILED - cantidad debe ser positiva - cantidad=%s - user_id=%s", cantidad, current_user.get('idUsuario'))
+            return jsonify({'error': 'La cantidad debe ser mayor a 0'}), 400
+
+        resultado = callMethod.procesar_venta_por_nombre(nombre, cantidad, current_user)
+
+        if resultado.get('success'):
+            logger.info("VENTA_PROCESADA - nombre=%s - cantidad=%s - user_id=%s - ventaId=%s",
+                        nombre, cantidad, current_user.get('idUsuario'), resultado.get('venta', {}).get('idVenta'))
+            # Devolvemos mensaje y producto (compatibilidad con frontend existente), además del registro de venta
+            return jsonify({
+                'message': 'Venta procesada correctamente',
+                'producto': resultado.get('producto'),
+                'venta': resultado.get('venta', {})
+            }), 200
+        else:
+            err = resultado.get('error', 'Error al procesar venta')
+            logger.warning("VENTA_FAILED - nombre=%s - cantidad=%s - error=%s - user_id=%s", nombre, cantidad, err, current_user.get('idUsuario'))
+            if err == 'Producto no encontrado':
+                return jsonify({'error': err}), 404
+            if err.startswith('No hay suficiente stock'):
+                return jsonify({'error': err}), 400
+            return jsonify({'error': err}), 400
+
+    except Exception:
+        logger.exception("Error en /venta")
+        HelperFunctions.PrintException()
+        return jsonify({'error': 'Error al procesar la venta'}), 500
+
+
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     logger.info(f"Arrancando servidor en puerto {port}")

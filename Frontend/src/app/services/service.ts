@@ -19,7 +19,7 @@ interface VerifyCodeResponse {
 export class ServiceService {
   private baseUrl = 'http://localhost:5000'; // URL de tu backend
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // --- Headers con token ---
   private getAuthHeaders(token: string): HttpHeaders {
@@ -77,5 +77,12 @@ export class ServiceService {
       { activo },
       { headers: this.getAuthHeaders(token) }
     );
+  }
+
+  // --- Venta (Punto de Venta) ---
+  ventaPorNombre(body: { nombre: string; cantidad: number }, token: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/venta`, body, {
+      headers: this.getAuthHeaders(token)
+    });
   }
 }

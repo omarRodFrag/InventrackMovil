@@ -346,3 +346,122 @@ def actualizar_activo(idProducto, activo):
         logger.exception("Error en actualizar_activo")
         HelperFunctions.PrintException()
         return {'success': False, 'error': 'Error al actualizar status'}
+
+
+
+def procesar_venta_por_nombre(nombre, cantidad, usuario=None):
+    """
+    Realiza la venta por nombre (solo nombre, user-friendly), reduce stock
+    y registra la venta en la colección clVentas.
+    Devuelve {'success': True, 'producto': {...}, 'venta': {...}} o {'success': False, 'error': '...'}
+    """
+    try:
+        if not nombre or str(nombre).strip() == "":
+            return {'success': False, 'error': 'Nombre inválido'}
+
+        try:
+            cantidad = int(cantidad)
+        except Exception:
+            return {'success': False, 'error': 'Cantidad inválida'}
+
+        if cantidad <= 0:
+            return {'success': False, 'error': 'Cantidad inválida'}
+
+        nombre_busqueda = str(nombre).strip()
+
+        # Filtro case-insensitive exact match (igual que en otras funciones)
+        filtro_update = {
+            "nombre": {"$regex": f"^{nombre_busqueda}$", "$options": "i"},
+            "cantidad": {"$gte": cantidad}
+        }
+
+        update = {
+            "$inc": {"cantidad": -cantidad},
+            "$set": {"ultimaActualizacion": datetime.datetime.utcnow()}
+        }
+
+        res = dbConnLocal.clProductos.update_one(filtro_update, update)
+
+        if res.modified_count > 0:
+            # Venta realizada. Recuperamos el documento actualizado
+            producto_actualizado = dbConnLocal.clProductos.find_one(
+                {"nombre": {"$regex": f"^{nombre_busqueda}$", "$options": "i"}}
+            )
+
+            if not producto_actualizado:
+                # Raro: se modificó pero no encontramos (fallback)
+                logger.warning("procesar_venta_por_nombre - producto actualizado pero find_one falló - nombre=%s", nombre_busqueda)
+                return {'success': True, 'producto': None, 'venta': {}}
+
+            # Preparar objeto producto para respuesta
+            producto_resp = {
+                "idProducto": producto_actualizado.get("idProducto"),
+                "nombre": producto_actualizado.get("nombre"),
+                "cantidad": producto_actualizado.get("cantidad"),
+                "ultimaActualizacion": producto_actualizado.get("ultimaActualizacion")
+            }
+
+            # --- Crear registro de venta en clVentas ---
+            try:
+                # Generar idVenta incremental (misma lógica que usas para idProducto)
+                max_id = list(dbConnLocal.clVentas.aggregate([
+                    {"$group": {"_id": None, "maxId": {"$max": "$idVenta"}}}
+                ]))
+                nuevo_id_venta = 1 if not max_id else max_id[0]['maxId'] + 1
+
+                # Intentamos obtener precio si el producto lo tiene (opcional)
+                precio_unitario = producto_actualizado.get('precio', None)
+                venta_total = None
+                if precio_unitario is not None:
+                    try:
+                        venta_total = float(precio_unitario) * float(cantidad)
+                    except Exception:
+                        venta_total = None
+
+                registro_venta = {
+                    "idVenta": nuevo_id_venta,
+                    "idProducto": producto_actualizado.get("idProducto"),
+                    "nombre": producto_actualizado.get("nombre"),
+                    "cantidadVendida": cantidad,
+                    "precioUnitario": precio_unitario,
+                    "ventaTotal": venta_total,
+                    "idUsuario": usuario.get('idUsuario') if usuario else None,
+                    "fecha": datetime.datetime.utcnow(),
+                }
+
+                insert_res = dbConnLocal.clVentas.insert_one(registro_venta)
+                logger.info("procesar_venta_por_nombre - registrado en clVentas - idVenta=%s - inserted_id=%s",
+                            nuevo_id_venta, insert_res.inserted_id)
+
+                venta_resp = {
+                    "idVenta": nuevo_id_venta,
+                    "idProducto": registro_venta.get("idProducto"),
+                    "cantidadVendida": registro_venta.get("cantidadVendida"),
+                    "precioUnitario": registro_venta.get("precioUnitario"),
+                    "ventaTotal": registro_venta.get("ventaTotal"),
+                    "fecha": registro_venta.get("fecha")
+                }
+
+            except Exception:
+                # Si por alguna razón falla el registro en clVentas, no revertimos el stock (pero lo logueamos)
+                logger.exception("procesar_venta_por_nombre - error registrando en clVentas")
+                HelperFunctions.PrintException()
+                venta_resp = {}
+
+            return {'success': True, 'producto': producto_resp, 'venta': venta_resp}
+
+        else:
+            # No se modificó nada: o no existe el producto o no hay stock suficiente.
+            existe = dbConnLocal.clProductos.find_one({"nombre": {"$regex": f"^{nombre_busqueda}$", "$options": "i"}})
+            if not existe:
+                logger.info("procesar_venta_por_nombre - producto no encontrado - nombre=%s", nombre_busqueda)
+                return {'success': False, 'error': 'Producto no encontrado'}
+            else:
+                logger.info("procesar_venta_por_nombre - stock insuficiente - nombre=%s - solicitado=%s - disponible=%s",
+                            nombre_busqueda, cantidad, existe.get('cantidad', 0))
+                return {'success': False, 'error': 'No hay suficiente stock para realizar esta operación'}
+
+    except Exception:
+        logger.exception("Error en procesar_venta_por_nombre")
+        HelperFunctions.PrintException()
+        return {'success': False, 'error': 'Error al procesar la venta'}

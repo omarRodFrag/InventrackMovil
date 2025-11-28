@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Punto de Venta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding page-bg">
+  <div class="container-formulario">
+    <form [formGroup]="ventaForm" (ngSubmit)="procesarVenta()">
+
+      <ion-item>
+        <ion-label position="floating">Nombre del producto</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Cantidad a vender</ion-label>
+        <ion-input type="number" formControlName="cantidad" min="1"></ion-input>
+      </ion-item>
+
+      <div class="button-group">
+        <ion-button expand="block" color="medium" (click)="cancelar()">Cancelar</ion-button>
+        <ion-button expand="block" type="submit" color="primary">Vender</ion-button>
+      </div>
+    </form>
+
+    <div *ngIf="resultadoVenta" class="ticket">
+      <h3>Venta procesada ✅</h3>
+      <p><strong>Producto:</strong> {{ resultadoVenta.producto?.nombre }}</p>
+      <p><strong>ID:</strong> {{ resultadoVenta.producto?.idProducto }}</p>
+      <p><strong>Stock restante:</strong> {{ resultadoVenta.producto?.cantidad }}</p>
+      <p class="small">Última actualización: {{ resultadoVenta.producto?.ultimaActualizacion | date:'short' }}</p>
+
+      <div class="ticket-actions">
+        <ion-button expand="block" color="tertiary" (click)="imprimirTicket()">Imprimir (o guardar)</ion-button>
+        <ion-button expand="block" color="success" (click)="nuevaVenta()">Nueva venta</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>
