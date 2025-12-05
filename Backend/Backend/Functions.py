@@ -110,6 +110,11 @@ def token_required(f):
 
 def fnLogin(email, password):
     try:
+        # Verificar que dbConnLocal no sea None
+        if dbConnLocal is None:
+            logger.error("dbConnLocal es None - no hay conexión a MongoDB")
+            return {'intResponse': 500, 'error': 'Error de conexión a la base de datos'}
+        
         # Buscar al usuario en la base de datos (sin comparar la contraseña directamente)
         jsnInfoUser = dbConnLocal.clUsuarios.find_one({"strEmail": email})
         
@@ -155,7 +160,12 @@ def fnLogin(email, password):
             return {'intResponse': 203, 'Result': {'usuario': {}, 'error': 'Usuario no encontrado'}}  # Usuario no encontrado
     except Exception as exception:
         logger.exception("Error en fnLogin")
-        return {'intResponse': 500}  # Error interno del servidor
+        import traceback
+        error_details = traceback.format_exc()
+        logger.error(f"dbConnLocal es None: {dbConnLocal is None}")
+        logger.error(f"Error detallado en fnLogin: {str(exception)}")
+        logger.error(f"Traceback: {error_details}")
+        return {'intResponse': 500, 'error': str(exception)}  # Error interno del servidor
 
 
 def fnRegister(email, password):

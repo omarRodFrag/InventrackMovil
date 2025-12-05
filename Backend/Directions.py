@@ -79,7 +79,11 @@ def login():
         return jsonify(response), response.get('intResponse', 200)
     except Exception as e:
         logger.exception("Error en la petición /login")
-        return jsonify({'error': 'Error en la petición'}), 400
+        import traceback
+        error_details = traceback.format_exc()
+        logger.error(f"Error completo en /login: {str(e)}")
+        logger.error(f"Traceback: {error_details}")
+        return jsonify({'error': 'Error en la petición', 'details': str(e)}), 500
 
 # Ruta para el registro
 @app.route('/register', methods=['POST'])
