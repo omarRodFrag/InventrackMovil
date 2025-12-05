@@ -81,6 +81,27 @@ def login():
         logger.exception("Error en la petición /login")
         return jsonify({'error': 'Error en la petición'}), 400
 
+# Ruta para el registro
+@app.route('/register', methods=['POST'])
+def register():
+    try:
+        data = request.get_json()
+        email = data.get('strEmail')
+        password = data.get('strPassword')
+
+        # Validar que se recibieron los datos
+        if not email or not password:
+            logger.warning("REGISTER_ATTEMPT - datos faltantes")
+            return jsonify({'error': 'Email y contraseña son requeridos'}), 400
+
+        # Llamar a la función de registro
+        response = callMethod.fnRegister(email, password)
+        logger.info(f"REGISTER_ATTEMPT - email={email} - result_code={response.get('intResponse')}")
+        return jsonify(response), response.get('intResponse', 200)
+    except Exception as e:
+        logger.exception("Error en la petición /register")
+        return jsonify({'error': 'Error en la petición'}), 400
+
 # Ruta para verificar el código MFA
 @app.route('/verify', methods=['POST'])
 @token_required

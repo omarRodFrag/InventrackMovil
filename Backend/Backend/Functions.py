@@ -158,6 +158,57 @@ def fnLogin(email, password):
         return {'intResponse': 500}  # Error interno del servidor
 
 
+def fnRegister(email, password):
+    try:
+        # Validar formato de email
+        email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_pattern, email):
+            logger.info(f"REGISTER_FAIL - email inválido - email={email}")
+            return {'intResponse': 400, 'error': 'Formato de email inválido'}
+        
+        # Verificar que el email no exista
+        usuario_existente = dbConnLocal.clUsuarios.find_one({"strEmail": email})
+        if usuario_existente is not None:
+            logger.info(f"REGISTER_FAIL - email ya existe - email={email}")
+            return {'intResponse': 400, 'error': 'El email ya está registrado'}
+        
+        # Validar contraseña (mínimo 6 caracteres)
+        if not password or len(password) < 6:
+            logger.info(f"REGISTER_FAIL - contraseña muy corta - email={email}")
+            return {'intResponse': 400, 'error': 'La contraseña debe tener al menos 6 caracteres'}
+        
+        # Hashear la contraseña con bcrypt
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        
+        # Generar idUsuario único
+        max_id = list(dbConnLocal.clUsuarios.aggregate([
+            {"$group": {"_id": None, "maxId": {"$max": "$idUsuario"}}}
+        ]))
+        nuevo_id = 1 if not max_id or max_id[0]['maxId'] is None else max_id[0]['maxId'] + 1
+        
+        # Crear nuevo usuario
+        nuevo_usuario = {
+            "idUsuario": nuevo_id,
+            "strEmail": email,
+            "strPassword": hashed_password,
+            "fechaRegistro": datetime.datetime.utcnow()
+        }
+        
+        # Guardar en la base de datos
+        insert_res = dbConnLocal.clUsuarios.insert_one(nuevo_usuario)
+        logger.info(f"REGISTER_SUCCESS - email={email} - idUsuario={nuevo_id} - inserted_id={insert_res.inserted_id}")
+        
+        return {
+            'intResponse': 201,
+            'message': 'Usuario registrado correctamente',
+            'idUsuario': nuevo_id
+        }
+    except Exception as exception:
+        logger.exception("Error en fnRegister")
+        HelperFunctions.PrintException()
+        return {'intResponse': 500, 'error': 'Error al registrar usuario'}
+
+
 # Función para obtener todos los productos
 def obtener_productos():
     try:

@@ -13,7 +13,14 @@ export class AlertasService {
 
   /** Llama al backend y actualiza el contador */
   refrescar(): void {
-    const token = localStorage.getItem('auth_token')!;
+    const token = localStorage.getItem('auth_token');
+    
+    // Solo hacer la petición si hay un token válido
+    if (!token) {
+      this.alertasCount.next(0);
+      return;
+    }
+    
     this.api.obtenerProductos(token).subscribe({
       next: (productos: Producto[]) => {
         const n = productos.filter(p => p.activo && p.cantidad <= p.stockMinimo).length;

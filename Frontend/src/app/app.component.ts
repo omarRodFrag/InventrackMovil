@@ -9,7 +9,7 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent {
   showNavbar = true;
-  hideOnRoutes = ['/login', '/register']; // agrega las rutas donde NO quieres navbar
+  hideOnRoutes = ['/login', '/registro']; // agrega las rutas donde NO quieres navbar
 
   constructor(private router: Router) {
     this.router.events.subscribe(ev => {

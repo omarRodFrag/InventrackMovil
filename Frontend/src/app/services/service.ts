@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Login } from '../interface/login.interface';
 import { Producto } from '../interface/producto.interface';
+import { environment } from '../../environments/environment';
 
 interface LoginResponse {
   message: string;
@@ -13,11 +14,17 @@ interface VerifyCodeResponse {
   message: string;
 }
 
+interface RegisterResponse {
+  message: string;
+  idUsuario?: number;
+  error?: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ServiceService {
-  private baseUrl = 'http://localhost:5000'; // URL de tu backend
+  private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +36,11 @@ export class ServiceService {
   // --- Login con JWT ---
   login(data: Login): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/login`, data);
+  }
+
+  // --- Registro de usuario ---
+  register(data: Login): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${this.baseUrl}/register`, data);
   }
 
   // --- Verificar código ---
