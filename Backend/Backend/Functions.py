@@ -39,6 +39,15 @@ if not logger.hasHandlers():
     logger.addHandler(fh)
 # ----------------------------------------------------------------
 
+# Variable global para la conexión a la base de datos
+dbConnLocal = None
+
+# Variable global para la instancia de Mail (se inicializa desde Directions.py)
+mail_instance = None
+
+from pymongo import MongoClient
+import Backend.GlobalInfo.keys as BaseDatos
+
 # Connection to database
 if BaseDatos.dbconn == None:
     try:
@@ -50,25 +59,23 @@ if BaseDatos.dbconn == None:
         logger.exception("Error inicializando BaseDatos.dbconn")
         dbConnLocal = None
 
-mail = Mail()
-from pymongo import MongoClient
-import Backend.GlobalInfo.keys as BaseDatos
-
-# Conexión a MongoDB
-try:
-    mongoConnect = MongoClient(BaseDatos.strConnection)
-    dbConnLocal = mongoConnect[BaseDatos.strDBConnection]
-    logger.info("Conexión exitosa a MongoDB Atlas")
-    
-    # Prueba una simple consulta
-    test_collection = dbConnLocal.clUsuarios.find_one()
-    if test_collection:
-        logger.info("Conexión verificada, datos obtenidos.")
-    else:
-        logger.info("Conexión verificada, pero no se encontraron datos.")
-    
-except Exception as e:
-    logger.exception("Error de conexión a MongoDB Atlas: %s", e)
+# Conexión a MongoDB (intento adicional para asegurar conexión)
+if dbConnLocal is None:
+    try:
+        mongoConnect = MongoClient(BaseDatos.strConnection)
+        dbConnLocal = mongoConnect[BaseDatos.strDBConnection]
+        BaseDatos.dbconn = dbConnLocal
+        logger.info("Conexión exitosa a MongoDB Atlas")
+        
+        # Prueba una simple consulta
+        test_collection = dbConnLocal.clUsuarios.find_one()
+        if test_collection:
+            logger.info("Conexión verificada, datos obtenidos.")
+        else:
+            logger.info("Conexión verificada, pero no se encontraron datos.")
+    except Exception as e:
+        logger.exception("Error de conexión a MongoDB Atlas: %s", e)
+        dbConnLocal = None
 
 def token_required(f):
     @wraps(f)
@@ -380,9 +387,14 @@ def eliminar_producto(idProducto):
 # Función para enviar el correo de verificación
 def send_verification_email(email, code):
     try:
+        # Usar la instancia global de mail (definida al inicio del módulo)
+        global mail_instance
+        if mail_instance is None:
+            logger.error("send_verification_email - mail_instance es None, no se puede enviar correo")
+            return False
         msg = Message('Código de Verificación', recipients=[email])
         msg.body = f'Tu código de verificación es: {code}'
-        mail.send(msg)
+        mail_instance.send(msg)
         logger.info(f"send_verification_email - email enviado a {email}")
         return True
     except Exception as e:

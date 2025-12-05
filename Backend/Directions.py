@@ -15,6 +15,7 @@ import json
 
 import Backend.GlobalInfo.keys as BaseDatos
 from Backend.Functions import dbConnLocal  # Para hacer la conexión a la BD
+import Backend.Functions as FunctionsModule  # Para poder asignar mail_instance
 from flask_mail import Mail, Message
 
 # --- Logging setup ---
@@ -46,6 +47,8 @@ app.config['MAIL_USERNAME'] = 'omar.rod.fraf@gmail.com'
 app.config['MAIL_PASSWORD'] = 'svxf owxq meja eavy'
 app.config['MAIL_DEFAULT_SENDER'] = 'omar.rod.fraf@gmail.com'
 mail = Mail(app)
+# Pasar la instancia de mail a Functions.py para que pueda enviar correos
+FunctionsModule.mail_instance = mail
 
 # Log de cada petición entrante
 @app.before_request
