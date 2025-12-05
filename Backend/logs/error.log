@@ -613,3 +613,67 @@ werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: E
 2025-11-28 21:44:03,970 - INFO - Functions - obtener_productos - encontrado 6 productos
 2025-11-28 21:44:03,970 - INFO - Directions - OBTENER_PRODUCTOS - user_id=1 - count=6
 2025-11-28 21:44:03,971 - INFO - Directions - REQ END - GET /productos - status 200
+2025-12-05 12:54:54,742 - INFO - Functions - Inicializada variable BaseDatos.dbconn
+2025-12-05 12:54:54,784 - INFO - Functions - Conexión exitosa a MongoDB Atlas
+2025-12-05 12:54:56,005 - INFO - Functions - Conexión verificada, datos obtenidos.
+2025-12-05 12:54:56,010 - INFO - Directions - Arrancando servidor en puerto 5000
+2025-12-05 12:55:02,445 - INFO - Directions - REQ START - OPTIONS /register - from 127.0.0.1
+2025-12-05 12:55:02,445 - INFO - Directions - REQ END - OPTIONS /register - status 200
+2025-12-05 12:55:02,708 - INFO - Directions - REQ START - POST /register - from 127.0.0.1
+2025-12-05 12:55:03,168 - INFO - Functions - REGISTER_SUCCESS - email=omar@gmail.com - idUsuario=2 - inserted_id=69332a87e19ccac86c593ee4
+2025-12-05 12:55:03,168 - INFO - Directions - REGISTER_ATTEMPT - email=omar@gmail.com - result_code=201
+2025-12-05 12:55:03,168 - INFO - Directions - REQ END - POST /register - status 201
+2025-12-05 12:55:49,824 - INFO - Directions - REQ START - OPTIONS /login - from 127.0.0.1
+2025-12-05 12:55:49,824 - INFO - Directions - REQ END - OPTIONS /login - status 200
+2025-12-05 12:55:50,127 - INFO - Directions - REQ START - POST /login - from 127.0.0.1
+2025-12-05 12:55:51,820 - INFO - Functions - send_verification_email - email enviado a omar@gmail.com
+2025-12-05 12:55:51,820 - INFO - Functions - LOGIN_SUCCESS - email=omar@gmail.com - idUsuario=2
+2025-12-05 12:55:51,820 - INFO - Directions - LOGIN_ATTEMPT - email=omar@gmail.com - result_code=200
+2025-12-05 12:55:51,820 - INFO - Directions - REQ END - POST /login - status 200
+2025-12-05 12:56:08,727 - INFO - Directions - REQ START - OPTIONS /verify - from 127.0.0.1
+2025-12-05 12:56:08,728 - INFO - Directions - REQ END - OPTIONS /verify - status 200
+2025-12-05 12:56:09,039 - INFO - Directions - REQ START - POST /verify - from 127.0.0.1
+2025-12-05 12:56:09,126 - INFO - Directions - VERIFY_CODE - user_id=2
+2025-12-05 12:56:09,224 - INFO - Directions - VERIFY_CODE - usuario encontrado en BD - email=omar@gmail.com
+2025-12-05 12:56:09,224 - INFO - Directions - VERIFY_CODE - código verificado correctamente
+2025-12-05 12:56:09,224 - INFO - Directions - REQ END - POST /verify - status 200
+2025-12-05 12:56:09,634 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-12-05 12:56:09,634 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-12-05 12:56:09,940 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-12-05 12:56:10,117 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-12-05 12:56:10,117 - INFO - Directions - OBTENER_PRODUCTOS - user_id=2 - count=6
+2025-12-05 12:56:10,117 - INFO - Directions - REQ END - GET /productos - status 200
+2025-12-05 12:56:10,203 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-12-05 12:56:10,385 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-12-05 12:56:10,386 - INFO - Directions - OBTENER_PRODUCTOS - user_id=2 - count=6
+2025-12-05 12:56:10,386 - INFO - Directions - REQ END - GET /productos - status 200
+2025-12-05 12:56:10,421 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-12-05 12:56:10,595 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-12-05 12:56:10,595 - INFO - Directions - OBTENER_PRODUCTOS - user_id=2 - count=6
+2025-12-05 12:56:10,595 - INFO - Directions - REQ END - GET /productos - status 200
+2025-12-05 12:56:10,695 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-12-05 12:56:10,872 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-12-05 12:56:10,872 - INFO - Directions - OBTENER_PRODUCTOS - user_id=2 - count=6
+2025-12-05 12:56:10,873 - INFO - Directions - REQ END - GET /productos - status 200
+2025-12-05 12:56:10,911 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-12-05 12:56:11,086 - INFO - Functions - obtener_productos - encontrado 6 productos
+2025-12-05 12:56:11,086 - INFO - Directions - OBTENER_PRODUCTOS - user_id=2 - count=6
+2025-12-05 12:56:11,086 - INFO - Directions - REQ END - GET /productos - status 200
+2025-12-05 13:02:37,232 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-12-05 13:02:37,232 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-12-05 13:02:37,492 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-12-05 13:02:37,492 - INFO - Functions - Token inválido o con firma incorrecta
+2025-12-05 13:02:37,492 - INFO - Directions - REQ END - GET /productos - status 401
+2025-12-05 13:03:13,404 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-12-05 13:03:13,404 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-12-05 13:03:13,729 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-12-05 13:03:13,730 - INFO - Functions - Token inválido o con firma incorrecta
+2025-12-05 13:03:13,730 - INFO - Directions - REQ END - GET /productos - status 401
+2025-12-05 13:03:16,491 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-12-05 13:03:16,491 - INFO - Functions - Token inválido o con firma incorrecta
+2025-12-05 13:03:16,491 - INFO - Directions - REQ END - GET /productos - status 401
+2025-12-05 13:04:03,841 - INFO - Directions - REQ START - OPTIONS /productos - from 127.0.0.1
+2025-12-05 13:04:03,841 - INFO - Directions - REQ END - OPTIONS /productos - status 200
+2025-12-05 13:04:04,101 - INFO - Directions - REQ START - GET /productos - from 127.0.0.1
+2025-12-05 13:04:04,101 - INFO - Functions - Token inválido o con firma incorrecta
+2025-12-05 13:04:04,102 - INFO - Directions - REQ END - GET /productos - status 401
